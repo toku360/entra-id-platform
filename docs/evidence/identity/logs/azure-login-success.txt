@@ -1,0 +1,23 @@
+Run azure/login@v2
+  with:
+    client-id: ***
+    tenant-id: ***
+    subscription-id: ***
+    enable-AzPSSession: false
+    environment: azurecloud
+    allow-no-subscriptions: false
+    audience: api://AzureADTokenExchange
+    auth-type: SERVICE_PRINCIPAL
+  env:
+    TERRAFORM_CLI_PATH: /home/runner/work/_temp/2e504b13-bbf2-403d-9e98-cb3decfc340b
+Running Azure CLI Login.
+/usr/bin/az cloud set -n azurecloud
+Done setting cloud: "azurecloud"
+Federated token details:
+ issuer - https://token.actions.githubusercontent.com
+ subject claim - repo:toku360/entra-id-platform:pull_request
+ audience - api://AzureADTokenExchange
+ job_workflow_ref - toku360/entra-id-platform/.github/workflows/terraform-plan.yml@refs/pull/1/merge
+Attempting Azure CLI login by using OIDC...
+Subscription is set successfully.
+Azure CLI login succeeds by using OIDC.
