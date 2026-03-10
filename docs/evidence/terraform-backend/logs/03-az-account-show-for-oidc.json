@@ -1,0 +1,16 @@
+{
+  "environmentName": "AzureCloud",
+  "homeTenantId": "5e293e2b-4926-46f2-af5c-b96f8213255b",
+  "id": "eecf2b7f-636f-47b8-9c5a-f561a4e59084",
+  "isDefault": true,
+  "managedByTenants": [],
+  "name": "サブスクリプション 1",
+  "state": "Enabled",
+  "tenantDefaultDomain": "msto51776gmail.onmicrosoft.com",
+  "tenantDisplayName": "既定のディレクトリ",
+  "tenantId": "5e293e2b-4926-46f2-af5c-b96f8213255b",
+  "user": {
+    "name": "msto51776@gmail.com",
+    "type": "user"
+  }
+}
