@@ -11,40 +11,112 @@ on:
 permissions:
   id-token: write
   contents: read
-    
+
 jobs:
-  terraform-dev:
-    name: Terraform Plan (dev)
+  terraform-plan:
+    name: Terraform Plan (${{ matrix.env_name }})
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: terraform/envs/dev
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - env_name: dev
+            working_directory: terraform/envs/dev
+            resource_group_name: rg-entra-id-platform-dev
+            location: Japan East
+            vnet_name: vnet-entra-id-platform-dev
+            vnet_address_space: '["10.10.0.0/16"]'
+            subnet_lab_prefix: '["10.10.1.0/24"]'
+            identity_name: id-entra-id-platform-dev
 
-    steps:  
+          - env_name: stg
+            working_directory: terraform/envs/stg
+            resource_group_name: rg-entra-id-platform-stg
+            location: Japan East
+            vnet_name: vnet-entra-id-platform-stg
+            vnet_address_space: '["10.20.0.0/16"]'
+            subnet_lab_prefix: '["10.20.1.0/24"]'
+            identity_name: id-entra-id-platform-stg
+
+          - env_name: prod
+            working_directory: terraform/envs/prod
+            resource_group_name: rg-entra-id-platform-prod
+            location: Japan East
+            vnet_name: vnet-entra-id-platform-prod
+            vnet_address_space: '["10.30.0.0/16"]'
+            subnet_lab_prefix: '["10.30.1.0/24"]'
+            identity_name: id-entra-id-platform-prod
+
+    steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Azure Login
+      - name: Azure Login (OIDC)
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Terraform Format
-        run: terraform fmt -check
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive terraform
+
+      - name: Create terraform.tfvars
+        working-directory: ${{ matrix.working_directory }}
+        run: |
+          cat > terraform.tfvars <<EOF
+          resource_group_name = "${{ matrix.resource_group_name }}"
+          location            = "${{ matrix.location }}"
+
+          vnet_name          = "${{ matrix.vnet_name }}"
+          vnet_address_space = ${{ matrix.vnet_address_space }}
+
+          subnets = {
+            subnet-lab = {
+              address_prefixes = ${{ matrix.subnet_lab_prefix }}
+            }
+          }
+
+          tags = {
+            project = "entra-id-platform"
+            env     = "${{ matrix.env_name }}"
+            owner   = "toku360"
+          }
+
+          security_rules = {
+            allow-ssh = {
+              priority                   = 100
+              direction                  = "Inbound"
+              access                     = "Allow"
+              protocol                   = "Tcp"
+              source_port_range          = "*"
+              destination_port_range     = "22"
+              source_address_prefix      = "*"
+              destination_address_prefix = "*"
+            }
+          }
+
+          identity_name = "${{ matrix.identity_name }}"
+
+          role_assignments = {
+            rg-reader = {
+              role_definition_name = "Reader"
+            }
+          }
+          EOF
 
       - name: Terraform Init
+        working-directory: ${{ matrix.working_directory }}
         run: terraform init -input=false
 
       - name: Terraform Validate
+        working-directory: ${{ matrix.working_directory }}
         run: terraform validate
 
       - name: Terraform Plan
+        working-directory: ${{ matrix.working_directory }}
         run: terraform plan -input=false -var-file="terraform.tfvars"
-
-
