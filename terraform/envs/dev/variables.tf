@@ -25,6 +25,11 @@ variable "subnets" {
   }))
 }
 
+variable "nsg_name" {
+  description = "Network Security Group name for dev environment"
+  type        = string
+}
+
 variable "tags" {
   description = "Tags for Azure resources"
   type        = map(string)
