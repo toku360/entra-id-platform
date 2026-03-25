@@ -35,9 +35,53 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      - name: Create terraform.tfvars
+        run: |
+          cat > terraform.tfvars <<EOF
+          resource_group_name = "rg-entra-id-platform-dev"
+          location            = "Japan East"
+
+          vnet_name     = "vnet-entra-id-platform-dev"
+          address_space = ["10.10.0.0/16"]
+
+          subnets = {
+            subnet-lab = {
+              address_prefixes = ["10.10.1.0/24"]
+            }
+          }
+
+          nsg_name = "nsg-entra-id-platform-dev"
+
+          tags = {
+            project = "entra-id-platform"
+            env     = "dev"
+            owner   = "toku360"
+          }
+
+          security_rules = {
+            allow-ssh = {
+              priority                   = 100
+              direction                  = "Inbound"
+              access                     = "Allow"
+              protocol                   = "Tcp"
+              source_port_range          = "*"
+              destination_port_range     = "22"
+              source_address_prefix      = "*"
+              destination_address_prefix = "*"
+            }
+          }
+
+          identity_name = "id-entra-id-platform-dev"
+
+          role_assignments = {
+            rg-reader = {
+              role_definition_name = "Reader"
+            }
+          }
+          EOF
+
       - name: Terraform Init
         run: terraform init -input=false
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -input=false -var-file="terraform.tfvars"
-
