@@ -74,13 +74,15 @@ jobs:
           location            = "${{ matrix.location }}"
 
           vnet_name          = "${{ matrix.vnet_name }}"
-          vnet_address_space = ${{ matrix.vnet_address_space }}
+          address_space = ${{ matrix.vnet_address_space }}
 
           subnets = {
             subnet-lab = {
               address_prefixes = ${{ matrix.subnet_lab_prefix }}
             }
           }
+
+          nsg_name = "nsg-${{ matrix.env_name }}"
 
           tags = {
             project = "entra-id-platform"
