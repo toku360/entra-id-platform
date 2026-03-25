@@ -226,6 +226,15 @@ docs/evidence/
 
 ---
 
+# Evidence（証跡あり）
 
+本リポジトリでは、すべての構成を証跡付きで公開しています。
+
+- Terraform Plan（GitHub Actions）
+- Azure構成（VNet / NSG / RBAC）
+- Managed Identity
+- OIDC認証ログ
+
+docs/evidence を参照
 
 
