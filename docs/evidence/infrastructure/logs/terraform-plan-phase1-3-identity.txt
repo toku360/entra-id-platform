@@ -1,0 +1,127 @@
+Acquiring state lock. This may take a few moments...
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+
+Terraform will perform the following actions:
+
+[1m  # module.identity.azurerm_role_assignment.this["rg-reader"][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_role_assignment" "this" {
+      [32m+[0m[0m condition_version                = (known after apply)
+      [32m+[0m[0m id                               = (known after apply)
+      [32m+[0m[0m name                             = (known after apply)
+      [32m+[0m[0m principal_id                     = (known after apply)
+      [32m+[0m[0m principal_type                   = (known after apply)
+      [32m+[0m[0m role_definition_id               = (known after apply)
+      [32m+[0m[0m role_definition_name             = "Reader"
+      [32m+[0m[0m scope                            = "/subscriptions/eecf2b7f-636f-47b8-9c5a-f561a4e59084/resourceGroups/rg-entra-id-platform-dev"
+      [32m+[0m[0m skip_service_principal_aad_check = (known after apply)
+    }
+
+[1m  # module.identity.azurerm_user_assigned_identity.this[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_user_assigned_identity" "this" {
+      [32m+[0m[0m client_id           = (known after apply)
+      [32m+[0m[0m id                  = (known after apply)
+      [32m+[0m[0m location            = "japaneast"
+      [32m+[0m[0m name                = "id-entra-id-platform-dev"
+      [32m+[0m[0m principal_id        = (known after apply)
+      [32m+[0m[0m resource_group_name = "rg-entra-id-platform-dev"
+      [32m+[0m[0m tags                = {
+          [32m+[0m[0m "env"     = "dev"
+          [32m+[0m[0m "owner"   = "toku360"
+          [32m+[0m[0m "project" = "entra-id-platform"
+        }
+      [32m+[0m[0m tenant_id           = (known after apply)
+    }
+
+[1m  # module.network.azurerm_subnet.this["subnet-lab"][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_subnet" "this" {
+      [32m+[0m[0m address_prefixes                              = [
+          [32m+[0m[0m "10.10.1.0/24",
+        ]
+      [32m+[0m[0m default_outbound_access_enabled               = true
+      [32m+[0m[0m id                                            = (known after apply)
+      [32m+[0m[0m name                                          = "subnet-lab"
+      [32m+[0m[0m private_endpoint_network_policies             = "Disabled"
+      [32m+[0m[0m private_link_service_network_policies_enabled = true
+      [32m+[0m[0m resource_group_name                           = "rg-entra-id-platform-dev"
+      [32m+[0m[0m virtual_network_name                          = "vnet-entra-id-platform-dev"
+    }
+
+[1m  # module.network.azurerm_virtual_network.this[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_virtual_network" "this" {
+      [32m+[0m[0m address_space                  = [
+          [32m+[0m[0m "10.10.0.0/16",
+        ]
+      [32m+[0m[0m dns_servers                    = (known after apply)
+      [32m+[0m[0m guid                           = (known after apply)
+      [32m+[0m[0m id                             = (known after apply)
+      [32m+[0m[0m location                       = "japaneast"
+      [32m+[0m[0m name                           = "vnet-entra-id-platform-dev"
+      [32m+[0m[0m private_endpoint_vnet_policies = "Disabled"
+      [32m+[0m[0m resource_group_name            = "rg-entra-id-platform-dev"
+      [32m+[0m[0m subnet                         = (known after apply)
+      [32m+[0m[0m tags                           = {
+          [32m+[0m[0m "env"     = "dev"
+          [32m+[0m[0m "owner"   = "toku360"
+          [32m+[0m[0m "project" = "entra-id-platform"
+        }
+    }
+
+[1m  # module.resource_group.azurerm_resource_group.this[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_resource_group" "this" {
+      [32m+[0m[0m id       = (known after apply)
+      [32m+[0m[0m location = "japaneast"
+      [32m+[0m[0m name     = "rg-entra-id-platform-dev"
+      [32m+[0m[0m tags     = {
+          [32m+[0m[0m "env"     = "dev"
+          [32m+[0m[0m "owner"   = "toku360"
+          [32m+[0m[0m "project" = "entra-id-platform"
+        }
+    }
+
+[1m  # module.security.azurerm_network_security_group.this[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_network_security_group" "this" {
+      [32m+[0m[0m id                  = (known after apply)
+      [32m+[0m[0m location            = "japaneast"
+      [32m+[0m[0m name                = "nsg-entra-id-platform-dev"
+      [32m+[0m[0m resource_group_name = "rg-entra-id-platform-dev"
+      [32m+[0m[0m security_rule       = (known after apply)
+      [32m+[0m[0m tags                = {
+          [32m+[0m[0m "env"     = "dev"
+          [32m+[0m[0m "owner"   = "toku360"
+          [32m+[0m[0m "project" = "entra-id-platform"
+        }
+    }
+
+[1m  # module.security.azurerm_network_security_rule.this["allow-ssh"][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_network_security_rule" "this" {
+      [32m+[0m[0m access                      = "Allow"
+      [32m+[0m[0m destination_address_prefix  = "*"
+      [32m+[0m[0m destination_port_range      = "22"
+      [32m+[0m[0m direction                   = "Inbound"
+      [32m+[0m[0m id                          = (known after apply)
+      [32m+[0m[0m name                        = "allow-ssh"
+      [32m+[0m[0m network_security_group_name = "nsg-entra-id-platform-dev"
+      [32m+[0m[0m priority                    = 100
+      [32m+[0m[0m protocol                    = "Tcp"
+      [32m+[0m[0m resource_group_name         = "rg-entra-id-platform-dev"
+      [32m+[0m[0m source_address_prefix       = "*"
+      [32m+[0m[0m source_port_range           = "*"
+    }
+
+[1m  # module.security.azurerm_subnet_network_security_group_association.this[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_subnet_network_security_group_association" "this" {
+      [32m+[0m[0m id                        = (known after apply)
+      [32m+[0m[0m network_security_group_id = (known after apply)
+      [32m+[0m[0m subnet_id                 = (known after apply)
+    }
+
+[1mPlan:[0m [0m8 to add, 0 to change, 0 to destroy.
+[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
+Releasing state lock. This may take a few moments...
