@@ -10,6 +10,8 @@ subnets = {
   }
 }
 
+nsg_name = "nsg-entra-id-platform-dev"
+
 tags = {
   project = "entra-id-platform"
   env     = "dev"

@@ -11,7 +11,7 @@ module "network" {
   resource_group_name = module.resource_group.name
   location            = module.resource_group.location
   vnet_name           = var.vnet_name
-  address_space       = var.vnet_address_space
+  address_space       = var.address_space
   subnets             = var.subnets
   tags                = var.tags
 }
@@ -22,7 +22,7 @@ module "security" {
   resource_group_name = module.resource_group.name
   location            = module.resource_group.location
 
-  nsg_name = "nsg-entra-id-platform-dev"
+  nsg_name = var.nsg_name
 
   subnet_ids = module.network.subnet_ids
 

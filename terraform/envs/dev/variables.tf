@@ -13,7 +13,7 @@ variable "vnet_name" {
   type        = string
 }
 
-variable "vnet_address_space" {
+variable "address_space" {
   description = "Address space for Virtual Network"
   type        = list(string)
 }
