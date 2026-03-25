@@ -1,0 +1,15 @@
+Acquiring state lock. This may take a few moments...
+[0m[1mmodule.resource_group.azurerm_resource_group.this: Refreshing state... [id=/subscriptions/eecf2b7f-636f-47b8-9c5a-f561a4e59084/resourceGroups/rg-entra-id-platform-stg][0m
+[0m[1mmodule.identity.azurerm_user_assigned_identity.this: Refreshing state... [id=/subscriptions/eecf2b7f-636f-47b8-9c5a-f561a4e59084/resourceGroups/rg-entra-id-platform-stg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-entra-id-platform-stg][0m
+[0m[1mmodule.security.azurerm_network_security_group.this: Refreshing state... [id=/subscriptions/eecf2b7f-636f-47b8-9c5a-f561a4e59084/resourceGroups/rg-entra-id-platform-stg/providers/Microsoft.Network/networkSecurityGroups/nsg-entra-id-platform-stg][0m
+[0m[1mmodule.network.azurerm_virtual_network.this: Refreshing state... [id=/subscriptions/eecf2b7f-636f-47b8-9c5a-f561a4e59084/resourceGroups/rg-entra-id-platform-stg/providers/Microsoft.Network/virtualNetworks/vnet-entra-id-platform-stg][0m
+[0m[1mmodule.identity.azurerm_role_assignment.this["rg-reader"]: Refreshing state... [id=/subscriptions/eecf2b7f-636f-47b8-9c5a-f561a4e59084/resourceGroups/rg-entra-id-platform-stg/providers/Microsoft.Authorization/roleAssignments/46000fea-c1be-6167-6a80-3ca2061a1e22][0m
+[0m[1mmodule.network.azurerm_subnet.this["subnet-lab"]: Refreshing state... [id=/subscriptions/eecf2b7f-636f-47b8-9c5a-f561a4e59084/resourceGroups/rg-entra-id-platform-stg/providers/Microsoft.Network/virtualNetworks/vnet-entra-id-platform-stg/subnets/subnet-lab][0m
+[0m[1mmodule.security.azurerm_network_security_rule.this["allow-ssh"]: Refreshing state... [id=/subscriptions/eecf2b7f-636f-47b8-9c5a-f561a4e59084/resourceGroups/rg-entra-id-platform-stg/providers/Microsoft.Network/networkSecurityGroups/nsg-entra-id-platform-stg/securityRules/allow-ssh][0m
+[0m[1mmodule.security.azurerm_subnet_network_security_group_association.this["subnet-lab"]: Refreshing state... [id=/subscriptions/eecf2b7f-636f-47b8-9c5a-f561a4e59084/resourceGroups/rg-entra-id-platform-stg/providers/Microsoft.Network/virtualNetworks/vnet-entra-id-platform-stg/subnets/subnet-lab][0m
+
+[0m[1m[32mNo changes.[0m[1m Your infrastructure matches the configuration.[0m
+
+[0mTerraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.
+Releasing state lock. This may take a few moments...
