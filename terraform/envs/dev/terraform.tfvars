@@ -2,7 +2,7 @@ resource_group_name = "rg-entra-id-platform-dev"
 location            = "Japan East"
 
 vnet_name          = "vnet-entra-id-platform-dev"
-vnet_address_space = ["10.10.0.0/16"]
+address_space = ["10.10.0.0/16"]
 
 subnets = {
   subnet-lab = {
